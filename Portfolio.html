@@ -1,0 +1,419 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Karthikeyan | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    :root {
+      /* Color palette */
+      --bg-1: #0F2027; /* deep teal/blue */
+      --bg-2: #203A43; /* mid teal */
+      --bg-3: #2C5364; /* slate teal */
+  --accent: #5AA3FF; /* main accent (slate blue) */
+  --accent-2: #2B7FFF; /* darker slate blue */
+      --muted-text: #E6F7F7; /* subtle light text */
+      --card-bg: rgba(255,255,255,0.05);
+      --glass: rgba(0,0,0,0.35);
+      --soft-white: rgba(255,255,255,0.95);
+    }
+
+    /* Light theme overrides (applies when body has .light-theme) */
+    body.light-theme {
+      --bg-1: #F6FAFF;
+      --bg-2: #F0F6FF;
+      --bg-3: #E8F1FF;
+      --accent: #3566D6; /* deep blue accent for light theme */
+      --accent-2: #254FB3;
+      --muted-text: #163243;
+      --card-bg: rgba(20,40,60,0.03);
+      --glass: rgba(255,255,255,0.85);
+      --soft-white: #071428;
+    }
+
+    /* === BACKGROUND ANIMATION === */
+    body {
+      color: var(--muted-text);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      background: linear-gradient(270deg, var(--bg-1), var(--bg-2), var(--bg-3));
+      background-size: 600% 600%;
+      animation: moveGradient 15s ease infinite;
+    }
+
+    @keyframes moveGradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* === HEADER === */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+    }
+
+    header h1 {
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    nav a {
+      color: var(--soft-white);
+      text-decoration: none;
+      margin: 0 15px;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    /* === SECTIONS === */
+    section {
+      padding: 120px 60px;
+      min-height: 100vh;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s ease-out;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #home {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    /* === HOME === */
+    .home-text {
+      max-width: 500px;
+      animation: fadeInUp 1.2s ease forwards;
+    }
+
+    .home-text h2 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .home-text h3 {
+      color: var(--accent);
+      font-size: 1.2rem;
+      height: 30px;
+    }
+
+    .typewriter {
+      border-right: 3px solid var(--accent);
+      display: inline-block;
+      animation: blink 0.8s infinite;
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    .home-text p {
+      margin-top: 15px;
+    }
+
+    .home-img {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 2s ease forwards;
+    }
+
+    .avatar-ring {
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 25%, var(--accent) 0%, var(--accent-2) 70%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      box-shadow: 0 12px 50px rgba(0,0,0,0.45), 0 0 40px rgba(0,230,230,0.08) inset;
+    }
+
+    .avatar-ring img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid rgba(255,255,255,0.06);
+    }
+
+    .btn {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--accent), #66ffff);
+      color: #001;
+      padding: 10px 25px;
+      border-radius: 30px;
+      margin-top: 20px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 8px 24px rgba(0,230,230,0.08);
+    }
+
+    .btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px rgba(0,230,230,0.14);
+    }
+
+    /* === PROJECTS === */
+    #projects {
+      position: relative;
+      background: var(--card-bg);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .project {
+      background: rgba(255,255,255,0.03);
+      border-radius: 15px;
+      padding: 25px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.45);
+    }
+
+    .project:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 18px 40px rgba(0,230,230,0.08);
+    }
+
+    .project h3 {
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    #about p {
+      max-width: 700px;
+      margin-top: 20px;
+      font-size: 1.1rem;
+      color: var(--muted-text);
+    }
+
+    #contact a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: rgba(0,0,0,0.2);
+      font-size: 14px;
+      box-shadow: 0 -6px 20px rgba(0,0,0,0.35);
+      color: var(--muted-text);
+    }
+
+    /* === ANIMATIONS === */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 10px 30px;
+      }
+
+      section {
+        padding: 90px 30px;
+      }
+
+      #home {
+        flex-direction: column-reverse;
+      }
+
+      .avatar-ring {
+        width: 250px;
+        height: 250px;
+      }
+
+      .home-text h2 {
+        font-size: 2rem;
+      }
+    }
+    /* Theme toggle button */
+    .theme-toggle {
+      margin-left: 20px;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.06);
+      color: var(--soft-white);
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.15s ease;
+      font-size: 18px;
+    }
+
+    .theme-toggle:hover { transform: translateY(-2px); }
+
+    body.light-theme .theme-toggle {
+      border-color: rgba(0,0,0,0.08);
+      color: var(--muted-text);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Karthikeyan</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </header>
+
+  <section id="home" class="visible">
+    <div class="home-text">
+      <h2>Hello, I’m <span style="color:#00e6e6;">Karthikeyan</span></h2>
+      <h3><span class="typewriter"></span></h3>
+      <p>I love building practical and creative web projects that solve real-world problems.</p>
+      <a href="#projects" class="btn">View My Work</a>
+    </div>
+    <div class="home-img">
+      <div class="avatar-ring">
+  <img src="avatar.png" alt="Karthikeyan">
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>I’m passionate about creating web applications that bring ideas to life. My projects focus on clean UI, real-world utility, and efficient code. I enjoy working with HTML, CSS, JavaScript, and emerging technologies like AI-based tools.</p>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="project-grid">
+      <div class="project">
+        <h3>🚌 BusNav</h3>
+        <p>A city bus guidance system that helps users find routes, stops, and destinations easily using interactive visuals.</p>
+      </div>
+      <div class="project">
+        <h3>🏫 InstiTrack</h3>
+        <p>An innovative bus tracking app for colleges that allows students to view their bus’s live location and stop alerts.</p>
+      </div>
+      <div class="project">
+        <h3>🎙️ Readify</h3>
+        <p>A Tamil poetry-to-speech app that reads Tamil poems aloud with fluent, near-natural pronunciation.</p>
+      </div>
+      <div class="project">
+        <h3>📖 Litro</h3>
+        <p>An interactive Tamil literature companion that helps users engage with Tamil classics through AI-powered narration.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:karthikeyan@gmail.com">karthikeyan@gmail.com</a></p>
+    <p>LinkedIn: <a href="#">linkedin.com/in/karthikeyan</a></p>
+  </section>
+
+  <footer>
+    © 2025 Karthikeyan | Built with 💙 using HTML, CSS & Creativity
+  </footer>
+
+  <!-- Typewriter Effect -->
+  <script>
+    const text = ["Web Developer", "Innovator", "Creator", "AI Enthusiast"];
+    let count = 0;
+    let index = 0;
+    let currentText = "";
+    let letter = "";
+
+    (function type() {
+      if (count === text.length) count = 0;
+      currentText = text[count];
+      letter = currentText.slice(0, ++index);
+      document.querySelector(".typewriter").textContent = letter;
+      if (letter.length === currentText.length) {
+        count++;
+        index = 0;
+        setTimeout(type, 1200);
+      } else {
+        setTimeout(type, 120);
+      }
+    })();
+  </script>
+
+  <script>
+    // Theme toggle with persistence
+    const themeToggle = document.getElementById('theme-toggle');
+    const userPref = localStorage.getItem('theme');
+    if (userPref === 'light') document.body.classList.add('light-theme');
+    const updateToggle = () => {
+      themeToggle.textContent = document.body.classList.contains('light-theme') ? '☀️' : '🌙';
+    };
+    updateToggle();
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light-theme');
+      const isLight = document.body.classList.contains('light-theme');
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      updateToggle();
+    });
+  </script>
+
+  <!-- Scroll Reveal Animation -->
+  <script>
+    const sections = document.querySelectorAll("section");
+    const revealOnScroll = () => {
+      const triggerBottom = window.innerHeight * 0.8;
+      sections.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+        if (sectionTop < triggerBottom) {
+          section.classList.add("visible");
+        }
+      });
+    };
+    window.addEventListener("scroll", revealOnScroll);
+    revealOnScroll();
+  </script>
+
+</body>
+</html>
