@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -14,24 +14,22 @@
     }
 
     :root {
-      /* Color palette */
-      --bg-1: #0F2027; /* deep teal/blue */
-      --bg-2: #203A43; /* mid teal */
-      --bg-3: #2C5364; /* slate teal */
-  --accent: #5AA3FF; /* main accent (slate blue) */
-  --accent-2: #2B7FFF; /* darker slate blue */
-      --muted-text: #E6F7F7; /* subtle light text */
+      --bg-1: #0F2027;
+      --bg-2: #203A43;
+      --bg-3: #2C5364;
+      --accent: #5AA3FF;
+      --accent-2: #2B7FFF;
+      --muted-text: #E6F7F7;
       --card-bg: rgba(255,255,255,0.05);
       --glass: rgba(0,0,0,0.35);
       --soft-white: rgba(255,255,255,0.95);
     }
 
-    /* Light theme overrides (applies when body has .light-theme) */
     body.light-theme {
       --bg-1: #F6FAFF;
       --bg-2: #F0F6FF;
       --bg-3: #E8F1FF;
-      --accent: #3566D6; /* deep blue accent for light theme */
+      --accent: #3566D6;
       --accent-2: #254FB3;
       --muted-text: #163243;
       --card-bg: rgba(20,40,60,0.03);
@@ -39,7 +37,6 @@
       --soft-white: #071428;
     }
 
-    /* === BACKGROUND ANIMATION === */
     body {
       color: var(--muted-text);
       line-height: 1.6;
@@ -56,7 +53,6 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* === HEADER === */
     header {
       display: flex;
       justify-content: space-between;
@@ -87,7 +83,6 @@
       color: var(--accent);
     }
 
-    /* === SECTIONS === */
     section {
       padding: 120px 60px;
       min-height: 100vh;
@@ -108,7 +103,6 @@
       flex-wrap: wrap;
     }
 
-    /* === HOME === */
     .home-text {
       max-width: 500px;
       animation: fadeInUp 1.2s ease forwards;
@@ -184,7 +178,6 @@
       box-shadow: 0 18px 40px rgba(0,230,230,0.14);
     }
 
-    /* === PROJECTS === */
     #projects {
       position: relative;
       background: var(--card-bg);
@@ -239,7 +232,6 @@
       color: var(--muted-text);
     }
 
-    /* === ANIMATIONS === */
     @keyframes fadeIn {
       from { opacity: 0; transform: scale(0.95); }
       to { opacity: 1; transform: scale(1); }
@@ -250,31 +242,17 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* === RESPONSIVE === */
     @media (max-width: 768px) {
       header {
         flex-direction: column;
         padding: 10px 30px;
       }
-
-      section {
-        padding: 90px 30px;
-      }
-
-      #home {
-        flex-direction: column-reverse;
-      }
-
-      .avatar-ring {
-        width: 250px;
-        height: 250px;
-      }
-
-      .home-text h2 {
-        font-size: 2rem;
-      }
+      section { padding: 90px 30px; }
+      #home { flex-direction: column-reverse; }
+      .avatar-ring { width: 250px; height: 250px; }
+      .home-text h2 { font-size: 2rem; }
     }
-    /* Theme toggle button */
+
     .theme-toggle {
       margin-left: 20px;
       background: transparent;
@@ -293,6 +271,109 @@
       border-color: rgba(0,0,0,0.08);
       color: var(--muted-text);
     }
+
+    /* === ACHIEVEMENTS SECTION === */
+    #achievements {
+      background: var(--card-bg);
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 40px 0;
+    }
+
+    .gallery-container { margin: 40px 0; }
+    .gallery-container h3 {
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px 0;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.45);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .gallery-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+      cursor: zoom-in;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      padding: 10px;
+      text-align: center;
+    }
+
+    /* Lightbox View */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(8px);
+      justify-content: center;
+      align-items: center;
+      animation: fadeInLightbox 0.3s ease forwards;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 12px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.7);
+      transform: scale(0.9);
+      animation: zoomIn 0.4s ease forwards;
+    }
+
+    @keyframes fadeInLightbox {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .lightbox.active { display: flex; }
   </style>
 </head>
 <body>
@@ -302,6 +383,7 @@
     <nav>
       <a href="#home">Home</a>
       <a href="#about">About</a>
+      <a href="#achievements">Achievements</a>
       <a href="#projects">Projects</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -312,78 +394,86 @@
     <div class="home-text">
       <h2>Hello, I’m <span style="color:#00e6e6;">Karthikeyan</span></h2>
       <h3><span class="typewriter"></span></h3>
-      <p>I love building practical and creative web projects that solve real-world problems.</p>
+      <p>I’m an emerging startup founder and tech enthusiast driven to build innovative products that solve real-world problems and create meaningful impact.</p>
       <a href="#projects" class="btn">View My Work</a>
     </div>
     <div class="home-img">
       <div class="avatar-ring">
-  <img src="avatar.png" alt="Karthikeyan">
+        <img src="https://raw.githubusercontent.com/karthikeyan-947/portfolio/main/avatar.png" alt="Karthikeyan">
       </div>
     </div>
   </section>
 
   <section id="about">
     <h2>About Me</h2>
-    <p>I’m passionate about creating web applications that bring ideas to life. My projects focus on clean UI, real-world utility, and efficient code. I enjoy working with HTML, CSS, JavaScript, and emerging technologies like AI-based tools.</p>
+    <p>I’m an aspiring tech innovator who loves turning ideas into impactful digital products. I enjoy learning new technologies and constantly improving my skills through hands-on projects.</p>
+  </section>
+
+  <section id="achievements">
+    <h2>Achievements & Events</h2>
+    <div class="gallery-container">
+      <h3>Certificates</h3>
+      <div class="gallery">
+        <div class="gallery-item">
+          <img src="https://raw.githubusercontent.com/karthikeyan-947/portfolio/main/certificates/cert1.jpg" alt="Certificate 1">
+          <div class="gallery-caption">Paper Presentation Certification</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://raw.githubusercontent.com/karthikeyan-947/portfolio/main/certificates/cert2.jpg" alt="Certificate 2">
+          <div class="gallery-caption">Nxt Gen Startup Participation</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-container">
+      <h3>Event Participations</h3>
+      <div class="gallery">
+        <div class="gallery-item">
+          <img src="https://raw.githubusercontent.com/karthikeyan-947/portfolio/main/events/event1.jpg" alt="Event 1">
+          <div class="gallery-caption">Nxt Gen Startup @MKCE</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://raw.githubusercontent.com/karthikeyan-947/portfolio/main/events/event2.jpg" alt="Event 2">
+          <div class="gallery-caption">Hackathon @SRM </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section id="projects">
     <h2>Projects</h2>
     <div class="project-grid">
-      <div class="project">
-        <h3>🚌 BusNav</h3>
-        <p>A city bus guidance system that helps users find routes, stops, and destinations easily using interactive visuals.</p>
-      </div>
-      <div class="project">
-        <h3>🏫 InstiTrack</h3>
-        <p>An innovative bus tracking app for colleges that allows students to view their bus’s live location and stop alerts.</p>
-      </div>
-      <div class="project">
-        <h3>🎙️ Readify</h3>
-        <p>A Tamil poetry-to-speech app that reads Tamil poems aloud with fluent, near-natural pronunciation.</p>
-      </div>
-      <div class="project">
-        <h3>📖 Litro</h3>
-        <p>An interactive Tamil literature companion that helps users engage with Tamil classics through AI-powered narration.</p>
-      </div>
+      <div class="project"><h3>🚌 BusNav</h3><p>A city bus guidance system that helps users find routes, stops, and destinations easily using interactive visuals.</p></div>
+      <div class="project"><h3>🏫 InstiTrack</h3><p>An innovative bus tracking app for colleges that allows students to view their bus’s live location and stop alerts.</p></div>
+      <div class="project"><h3>🎙️ Readify</h3><p>A Tamil poetry-to-speech app that reads Tamil poems aloud with fluent, near-natural pronunciation.</p></div>
+      <div class="project"><h3>📖 Litro</h3><p>An interactive Tamil literature companion that helps users engage with Tamil classics through AI-powered narration.</p></div>
     </div>
   </section>
 
   <section id="contact">
     <h2>Contact</h2>
-    <p>Email: <a href="mailto:karthikeyan@gmail.com">karthikeyan@gmail.com</a></p>
-    <p>LinkedIn: <a href="#">linkedin.com/in/karthikeyan</a></p>
+    <p>Email: <a href="mailto:karthikeyanshankar8@gmail.com">karthikeyanshankar8@gmail.com</a></p>
+    <p>LinkedIn: <a href="https://www.linkedin.com/in/karthikeyan-s-2393332b4" target="_blank">S.Karthikeyan</a></p>
   </section>
 
-  <footer>
-    © 2025 Karthikeyan | Built with 💙 using HTML, CSS & Creativity
-  </footer>
+  <footer>© 2025 Karthikeyan | Built using HTML, CSS & Creativity</footer>
 
-  <!-- Typewriter Effect -->
+  <!-- Typewriter -->
   <script>
-    const text = ["Web Developer", "Innovator", "Creator", "AI Enthusiast"];
-    let count = 0;
-    let index = 0;
-    let currentText = "";
-    let letter = "";
-
+    const text = ["Entrepreneur","Web Developer", "Innovator", "Creator", "AI Enthusiast"];
+    let count = 0, index = 0, currentText = "", letter = "";
     (function type() {
       if (count === text.length) count = 0;
       currentText = text[count];
       letter = currentText.slice(0, ++index);
       document.querySelector(".typewriter").textContent = letter;
-      if (letter.length === currentText.length) {
-        count++;
-        index = 0;
-        setTimeout(type, 1200);
-      } else {
-        setTimeout(type, 120);
-      }
+      if (letter.length === currentText.length) { count++; index = 0; setTimeout(type, 1200); }
+      else { setTimeout(type, 120); }
     })();
   </script>
 
+  <!-- Theme toggle -->
   <script>
-    // Theme toggle with persistence
     const themeToggle = document.getElementById('theme-toggle');
     const userPref = localStorage.getItem('theme');
     if (userPref === 'light') document.body.classList.add('light-theme');
@@ -399,21 +489,52 @@
     });
   </script>
 
-  <!-- Scroll Reveal Animation -->
+  <!-- Scroll Reveal -->
   <script>
     const sections = document.querySelectorAll("section");
     const revealOnScroll = () => {
       const triggerBottom = window.innerHeight * 0.8;
       sections.forEach(section => {
         const sectionTop = section.getBoundingClientRect().top;
-        if (sectionTop < triggerBottom) {
-          section.classList.add("visible");
-        }
+        if (sectionTop < triggerBottom) section.classList.add("visible");
       });
     };
     window.addEventListener("scroll", revealOnScroll);
     revealOnScroll();
   </script>
 
+  <!-- Gallery Animation -->
+  <script>
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const revealGallery = () => {
+      const triggerBottom = window.innerHeight * 0.8;
+      galleryItems.forEach(item => {
+        const itemTop = item.getBoundingClientRect().top;
+        if (itemTop < triggerBottom) item.classList.add('visible');
+      });
+    };
+    window.addEventListener('scroll', revealGallery);
+    revealGallery();
+  </script>
+
+  <!-- Lightbox Viewer -->
+  <div id="lightbox" class="lightbox">
+    <img id="lightbox-img" src="" alt="Certificate Preview">
+  </div>
+
+  <script>
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    document.querySelectorAll(".gallery-item img").forEach(img => {
+      img.addEventListener("click", () => {
+        lightboxImg.src = img.src;
+        lightbox.classList.add("active");
+      });
+    });
+    lightbox.addEventListener("click", () => {
+      lightbox.classList.remove("active");
+    });
+  </script>
 </body>
 </html>
+
